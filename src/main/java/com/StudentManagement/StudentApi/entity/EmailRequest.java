@@ -1,23 +1,33 @@
 package com.StudentManagement.StudentApi.entity;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-//package com.example.PahlaProject.Entity;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 @Entity
 public class EmailRequest {
+
     @Id
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
     private String email;
-    private int otp;
+
+    private Integer otp;
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    public int getOtp() {
+
+    public Integer getOtp() {
         return otp;
     }
-    public void setOtp(int otp) {
+
+    public void setOtp(Integer otp) {
         this.otp = otp;
     }
 }
-

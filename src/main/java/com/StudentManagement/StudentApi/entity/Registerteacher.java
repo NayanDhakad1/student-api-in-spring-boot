@@ -5,6 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Registerteacher {
@@ -14,14 +19,24 @@ public class Registerteacher {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must be at most 100 characters")
     private String name;
 
+    @NotNull(message = "Mobile is required")
     private Long mobile;
 
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
     private String email;
 
+    @NotBlank(message = "Subject is required")
+    @Size(max = 100, message = "Subject must be at most 100 characters")
     private String subject;
+
+    @NotBlank(message = "Address is required")
+    @Size(max = 255, message = "Address must be at most 255 characters")
     private String address;
 
 

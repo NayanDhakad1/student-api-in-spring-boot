@@ -4,15 +4,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 @Entity
 public class StudentEntry {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must be at most 100 characters")
     private String name;
+
+    @NotBlank(message = "Mobile is required")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Mobile must be a 10-digit number")
     private String mobile;
+
+    @NotBlank(message = "Course is required")
+    @Size(max = 100, message = "Course must be at most 100 characters")
     private String course;
+
+    @NotBlank(message = "Branch is required")
+    @Size(max = 100, message = "Branch must be at most 100 characters")
     private String branch;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
+    @Column(unique = true)
     private String email;
     public String getEmail() {
         return email;

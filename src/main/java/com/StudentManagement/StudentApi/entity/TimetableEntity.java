@@ -4,16 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class TimetableEntity {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
+
+@NotBlank(message = "Teacher name is required")
 private String teacherName;
+
+@NotBlank(message = "Subject is required")
 private String subject;
+
+@NotBlank(message = "Day is required")
 private String day;
+
+@NotNull(message = "Time is required")
 private Long time;
+
+@NotBlank(message = "Classroom is required")
 private String classroom;
 
 public TimetableEntity(){}

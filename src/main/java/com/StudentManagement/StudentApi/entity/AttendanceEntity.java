@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class AttendanceEntity {
@@ -11,9 +13,17 @@ public class AttendanceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotBlank(message = "Student name is required")
     private String StudentName;
+
+    @NotBlank(message = "Subject is required")
     private String Subject;
+
+    @NotNull(message = "Date is required")
     private Long Date;
+
+    @NotBlank(message = "Status is required")
     private String Status;
 
     public Long getId() {

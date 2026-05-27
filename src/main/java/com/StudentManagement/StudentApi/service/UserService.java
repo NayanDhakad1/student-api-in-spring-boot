@@ -18,8 +18,7 @@ public class UserService {
         // Find user by name
         Optional<User> optionalUser =
                 userRepository.findByName(loginresponse.getName());
-        // Agar name exist nahi karta
-        if (optionalUser.isEmpty()) {
+        if (!optionalUser.isPresent()) {
             return false;
         }
         User user = optionalUser.get();

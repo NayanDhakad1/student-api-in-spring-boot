@@ -1,8 +1,22 @@
 package com.StudentManagement.StudentApi.entity;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Employee {
     private int id;
+
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must be at most 100 characters")
     private String name;
-    private int age;
+
+    @NotNull(message = "Age is required")
+    @Min(value = 18, message = "Age must be at least 18")
+    @Max(value = 70, message = "Age must be at most 70")
+    private Integer age;
     public int getId() {
         return id;
     }
