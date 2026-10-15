@@ -18,12 +18,20 @@ public class EmailService {
     private JavaMailSender mailSender;
     //senotp
     public String sendOtp(String email) {
+
         int otp = new Random().nextInt(900000) + 100000;
+
         EmailRequest request = new EmailRequest();
         request.setEmail(email);
         request.setOtp(otp);
+
         otpRepo.save(request);
-        sendEmail(email, otp);
+
+        // ❌ EMAIL SEND OFF (temporary)
+        // sendEmail(email, otp);
+
+        System.out.println("OTP = " + otp); // testing ke liye
+
         return "OTP sent successfully";
     }
     //verifyotp

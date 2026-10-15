@@ -17,15 +17,11 @@ public class userconfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors(Customizer.withDefaults())   //VERY IMPORTANT (CORS fix)
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/user").permitAll()
                         .anyRequest().permitAll()
-
-                )
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults());
+                );
 
         return http.build();
     }
