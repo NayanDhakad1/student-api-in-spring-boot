@@ -51,18 +51,33 @@ public class EmailService {
 
         } catch (MailException e) {
 
-            System.err.println("OTP EMAIL FAILED: " + e.getMessage());
+            System.err.println("========== OTP EMAIL FAILED ==========");
+            e.printStackTrace();
+
+            Throwable cause = e.getCause();
+
+            while (cause != null) {
+                System.err.println(
+                        "ROOT CAUSE: " + cause.getClass().getName()
+                );
+                System.err.println(
+                        "ROOT MESSAGE: " + cause.getMessage()
+                );
+
+                cause = cause.getCause();
+            }
+
             throw new RuntimeException(
-                    "Failed to send OTP email. Please check Gmail configuration.",
-                    e
+                    "Failed to send OTP email: " + e.getMessage(), e
             );
 
         } catch (Exception e) {
 
-            System.err.println("OTP ERROR: " + e.getMessage());
+            System.err.println("========== OTP PROCESSING FAILED ==========");
+            e.printStackTrace();
+
             throw new RuntimeException(
-                    "Unable to process OTP. Please try again.",
-                    e
+                    "Unable to process OTP: " + e.getMessage(), e
             );
         }
     }
@@ -94,7 +109,10 @@ public class EmailService {
 
         message.setFrom(senderEmail);
         message.setTo(toEmail);
-        message.setSubject("Student Management System - OTP Verification");
+
+        message.setSubject(
+                "Student Management System - OTP Verification"
+        );
 
         message.setText(
                 "Hello,\n\n" +
